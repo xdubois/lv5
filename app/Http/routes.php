@@ -37,3 +37,8 @@ Route::group(['middleware' => 'web'], function () {
     
     Route::get('/home', 'HomeController@index');
 });
+
+
+Route::get('/admin', ['middleware' => ['admin'], function() {
+    return 'futur_admin_panel';
+}]);
