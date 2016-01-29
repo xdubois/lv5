@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -69,6 +70,22 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+
+    /**
+     * called by handleUserWasAuthenticated method
+     * from trait AuthenticatesUsers
+     * save last login of the user
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    private function authenticated($request, User $user) {
+        $user->last_login = Carbon::now();
+        $user->save();
+
+        return redirect()->intended($this->redirectPath());
+    }
+
 
 
 }
