@@ -24,21 +24,28 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('/', function () {
-    return view('welcome');
-     });
+      return view('welcome');
+    });
     
     Route::get('/home', 'HomeController@index');
+
+    //admin routes
+    Route::group(['namespace' => 'Admin'], function() {
+      Route::get('/admin', 'AdminController@panel');
+    });
+
 });
 
 
-Route::get('/admin', ['middleware' => ['admin'], function() {
-    return 'futur_admin_panel';
-}]);
+
+
+
+
+
+
+
