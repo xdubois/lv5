@@ -15,6 +15,6 @@ class HomeController extends AuthorizedController
      */
     public function index()
     {
-        return view('home');
+        return view('upload.index');
     }
 }

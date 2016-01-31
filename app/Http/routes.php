@@ -41,8 +41,18 @@ Route::group(['middleware' => 'web'], function () {
 
 });
 
+Route::post('/upload', array('as' => 'upload', 'uses' => 'UploaderController@upload'));
 
+Route::get('/test', function () {
+  $filename = 'bite';
 
+  $files = [];
+  $files['files'][] = ['url' => $filename];
+  $files['files'][] = ['url' => $filename];
+
+  return Response::json($files);
+
+});
 
 
 
